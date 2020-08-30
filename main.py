@@ -58,8 +58,10 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.data_index = None
         self.totalindex = 0
         self.fileName = ""
-        self.emotion_value = self.emotion_list[0]
         self.save_curr_flag = False
+        self._resetSelection()
+
+    def _resetSelection(self):
         self.emotion_value = self.emotion_list[0]
         self.sarcasm = self.radio_list[0]
         self.metaphor = self.radio_list[0]
@@ -68,6 +70,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.symbolism = self.radio_list[0]
         self.sentiment = self.radio_list[0]
         self._cleanText()
+
 
     def _selectEmotion(self, i):
         self.emotion_value = i
@@ -112,8 +115,8 @@ class MainForm(QMainWindow, Ui_MainWindow):
         if flag == True:
             self.totalindex += 1
             self._showData()
+            self._resetSelection()
             self.save_curr_flag = False
-            self._cleanText()
             if self.totalindex % 10 == 0:
                 self._saveToFile()
 
@@ -131,21 +134,18 @@ class MainForm(QMainWindow, Ui_MainWindow):
             return True
         l1, sent1 = self.sarcasm, self.inputtext_1.text()
         f1, data1 = self._constructor(l1, sents=sent1, flag=2)
-        print(data1)
         l2, sent21, sent22 = self.metaphor, self.inputtext_21.text(), self.inputtext_22.text()
         f2, data2 = self._constructor(l2, sents=sent21, sents2=sent22, flag=3)
         l3, sent3 = self.exaggeration, self.inputtext_3.text()
         f3, data3 = self._constructor(l3, sents=sent3, flag=2)
-
         l4, sent41, sent42 = self.homophonic, self.inputtext_41.text(), self.inputtext_42.text()
         f4, data4 = self._constructor(l4, sents=sent41, sents2=sent42, flag=3)
-
         l5, sent51, sent52 = self.symbolism, self.inputtext_51.text(), self.inputtext_52.text()
         f5, data5 = self._constructor(l5, sents=sent51, sents2=sent52, flag=3)
         data6 = self.emotion_value
         f7, data7 = self._constructor(self.sentiment, flag=1)
         data8 = self.input_8.text() if self.input_8.text() != "" else "-"
-
+        # print(data1, data2, data3, data4, data5, data6, data7, data8)
         if f1 and f2 and f3 and f4 and f5 and f7:
             self.data.loc[self.data_index[self.totalindex],'sarcasm'] = data1
             self.data.loc[self.data_index[self.totalindex],'metaphor'] = data2

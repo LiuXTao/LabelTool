@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="feb2a67a-2734-4261-8905-6ac9c65305d5" name="Default" comment="" />
+    <list default="true" id="feb2a67a-2734-4261-8905-6ac9c65305d5" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/BiaoZhuTool$main.coverage" NAME="main Coverage Results" MODIFIED="1598782557772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BiaoZhuTool$main.coverage" NAME="main Coverage Results" MODIFIED="1598785095440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BiaoZhuTool$label.coverage" NAME="label Coverage Results" MODIFIED="1598752959499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -18,8 +22,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-361">
-              <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            <state relative-caret-position="160">
+              <caret line="148" column="49" lean-forward="true" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
               <folding>
                 <element signature="e#91#120#0" expanded="true" />
               </folding>
@@ -30,8 +34,8 @@
       <file leaf-file-name="uiwindow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uiwindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4218">
-              <caret line="222" column="35" selection-start-line="222" selection-start-column="35" selection-end-line="222" selection-end-column="35" />
+            <state relative-caret-position="314">
+              <caret line="291" column="37" lean-forward="true" selection-start-line="291" selection-start-column="37" selection-end-line="291" selection-end-column="37" />
               <folding>
                 <element signature="e#96#105#0" expanded="true" />
               </folding>
@@ -61,8 +65,12 @@
       <find>sarcasm</find>
       <find>input_1</find>
       <find>self.input_</find>
+      <find>print(</find>
       <find>bg1</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -90,6 +98,7 @@
     <option name="width" value="1940" />
     <option name="height" value="1100" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -198,9 +207,9 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32210243" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32253712" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17761394" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -334,8 +343,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uiwindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4218">
-          <caret line="222" column="35" selection-start-line="222" selection-start-column="35" selection-end-line="222" selection-end-column="35" />
+        <state relative-caret-position="314">
+          <caret line="291" column="37" lean-forward="true" selection-start-line="291" selection-start-column="37" selection-end-line="291" selection-end-column="37" />
           <folding>
             <element signature="e#96#105#0" expanded="true" />
           </folding>
@@ -344,8 +353,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-361">
-          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        <state relative-caret-position="160">
+          <caret line="148" column="49" lean-forward="true" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
           <folding>
             <element signature="e#91#120#0" expanded="true" />
           </folding>
