@@ -22,7 +22,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.data = None
         self.data_index = None
         self.totalindex = 0
-        self.fileName = ""
+        self.file_name = ""
         self.emotion_value = self.emotion_list[0]
         self.sarcasm = self.radio_list[0]
         self.metaphor = self.radio_list[0]
@@ -44,18 +44,19 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.bg7.buttonClicked.connect(self.rbclicked)
 
     def _openFile(self):
-        fileName, fileType = QtWidgets.QFileDialog.getOpenFileName(self, "选择文件", os.getcwd(),
+        file_name, file_type = QtWidgets.QFileDialog.getOpenFileName(self, "选择文件", os.getcwd(),
                                                                    "All Files(*);;Text Files(*.csv)")
         self._reset()
-        self.fileName = fileName
-        self._loadFile(fileName)
+        self.file_path.setText(file_name)
+        self.file_name = file_name
+        self._loadFile(file_name)
         self._showData()
 
     def _reset(self):
         self.data = None
         self.data_index = None
         self.totalindex = 0
-        self.fileName = ""
+        self.file_name = ""
         self.save_curr_flag = False
         self._resetSelection()
 
@@ -82,6 +83,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
 
     def _showData(self):
         nums = self.data.shape[0]
+        is_operate = False
         for i in range(self.totalindex, nums):
             df = self.data.iloc[i]
             f1, f2, f3, f4, f5, f6, f7, f8 = df['sarcasm'], df['metaphor'], df['exaggeration'], df['homophonic'], df['symbolism'], df['emotion'], df['sentiment'], df['other_subtext']
@@ -93,10 +95,13 @@ class MainForm(QMainWindow, Ui_MainWindow):
                     self.comment_text.setText(str(df['comment']))
                     self.content_text.setText("{}\n{}".format(df['question'], df['content']))
                 self.totalindex = i
+                is_operate = True
                 self._setLabel()
                 break
             else:
                 continue
+        if is_operate == False:
+            self._showMessage(message="文件为空或者文件已经标注完")
 
     def _showPrev(self):
         df = self.data.iloc[self.totalindex]
@@ -111,6 +116,9 @@ class MainForm(QMainWindow, Ui_MainWindow):
     def _clickNext(self):
         flag = self._saveData()
         if flag == True:
+            if self.totalindex + 1 >= self.data.shape[0]:
+                self._showMessage(message="文件已经标注完")
+                return
             self.totalindex += 1
             self._showData()
             self._resetSelection()
@@ -118,7 +126,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
             if self.totalindex % 10 == 0:
                 self._saveToFile()
 
-    def _show_message(self, message):
+    def _showMessage(self, message):
         QtWidgets.QMessageBox.information(self, "信息提示框", message, QtWidgets.QMessageBox.Yes)
 
     def _setLabel(self):
@@ -126,7 +134,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
 
     def _saveData(self):
         if self.data is None:
-            self._show_message(message="请选择并打开文件")
+            self._showMessage(message="请选择并打开文件")
             return False
         if self.save_curr_flag == True:
             return True
@@ -155,7 +163,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
             self.data.loc[self.data_index[self.totalindex], 'other_subtext'] = data8
             self.save_curr_flag = True
             return True
-        self._show_message(message="输入不符合格式")
+        self._showMessage(message="输入不符合格式")
         return False
 
     def rbclicked(self):
@@ -175,7 +183,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
 
 
     def _saveToFile(self):
-        self.data.to_csv(self.fileName, index=False)
+        self.data.to_csv(self.file_name, index=False)
 
     def _constructor(self, label, sents=None, flag=2, sents2=None):
         if label not in ["-1", "0", "1"]:

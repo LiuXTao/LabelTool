@@ -57,13 +57,12 @@ class Ui_MainWindow(QWidget):
 
         # self.pre_btn = QPushButton("上一条")
         self.curr_label = QLabel("")
-
-
         self.curr_label.setFont(font)
         self.next_btn = QPushButton("下一条")
+        self.file_path = QLabel("")
         self.next_btn.setFont(font)
-        # self.top_layout.addWidget(self.pre_btn, 1, QtCore.Qt.AlignLeft)
-        self.top_layout.addWidget(self.curr_label, 4, QtCore.Qt.AlignLeft)
+        self.top_layout.addWidget(self.curr_label, 1, QtCore.Qt.AlignLeft)
+        self.top_layout.addWidget(self.file_path, 4, QtCore.Qt.AlignCenter)
         self.top_layout.addWidget(self.next_btn, 1, QtCore.Qt.AlignRight)
 
 
