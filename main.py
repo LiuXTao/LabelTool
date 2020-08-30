@@ -12,8 +12,6 @@ from uiwindow import Ui_MainWindow
 import sys
 import os
 import pandas as pd
-import numpy as np
-
 
 class MainForm(QMainWindow, Ui_MainWindow):
     def __init__(self):
