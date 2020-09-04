@@ -24,12 +24,12 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.totalindex = 0
         self.file_name = ""
         self.emotion_value = self.emotion_list[0]
-        self.sarcasm = self.radio_list[0]
-        self.metaphor = self.radio_list[0]
-        self.exaggeration = self.radio_list[0]
-        self.homophonic = self.radio_list[0]
-        self.symbolism = self.radio_list[0]
-        self.sentiment = self.radio_list[0]
+        self.sarcasm = None
+        self.metaphor = None
+        self.exaggeration = None
+        self.homophonic = None
+        self.symbolism = None
+        self.sentiment = None
         self.save_curr_flag = False
         # add action
         self.actionfileopen.triggered.connect(self._openFile)
@@ -62,12 +62,12 @@ class MainForm(QMainWindow, Ui_MainWindow):
 
     def _resetSelection(self):
         self.emotion_value = self.emotion_list[0]
-        self.sarcasm = self.radio_list[0]
-        self.metaphor = self.radio_list[0]
-        self.exaggeration = self.radio_list[0]
-        self.homophonic = self.radio_list[0]
-        self.symbolism = self.radio_list[0]
-        self.sentiment = self.radio_list[0]
+        self.sarcasm = None
+        self.metaphor = None
+        self.exaggeration = None
+        self.homophonic = None
+        self.symbolism = None
+        self.sentiment = None
         self._cleanText()
 
 
@@ -189,11 +189,11 @@ class MainForm(QMainWindow, Ui_MainWindow):
         if label not in ["-1", "0", "1"]:
             return False, None
         if flag == 2:
-            sents = "-" if sents == "" else sents
+            sents = "-" if label == "-1" or label == '0' else sents
             return True, "{};{}".format(label, sents)
-        elif flag ==3:
-            sents = "-" if sents == "" else sents
-            sents2 = "-" if sents2 == "" else sents2
+        elif flag == 3:
+            sents = "-" if label == "-1" or label == '0' else sents
+            sents2 = "-" if label == "-1" or label == '0' else sents2
             return True, "{};{};{}".format(label, sents, sents2)
         else:
             return True, "{}".format(label)

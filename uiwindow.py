@@ -45,8 +45,7 @@ class Ui_MainWindow(QWidget):
     def initMain(self):
         font = QtGui.QFont()
         font.setFamily("Arial")  # 括号里可以设置成自己想要的其它字体
-        font.setPointSize(14)  # 括号里的数字可以设置成自己想要的字体大小
-
+        font.setPointSize(13)  # 括号里的数字可以设置成自己想要的字体大小
         self.main_layout = QVBoxLayout()
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
@@ -58,12 +57,11 @@ class Ui_MainWindow(QWidget):
         # self.pre_btn = QPushButton("上一条")
         self.curr_label = QLabel("")
         self.curr_label.setFont(font)
-        self.next_btn = QPushButton("下一条")
+        # self.next_btn = QPushButton("下一条")
         self.file_path = QLabel("")
-        self.next_btn.setFont(font)
         self.top_layout.addWidget(self.curr_label, 1, QtCore.Qt.AlignLeft)
-        self.top_layout.addWidget(self.file_path, 4, QtCore.Qt.AlignCenter)
-        self.top_layout.addWidget(self.next_btn, 1, QtCore.Qt.AlignRight)
+        self.top_layout.addWidget(self.file_path, 4, QtCore.Qt.AlignRight)
+        # self.top_layout.addWidget(self.next_btn, 1, QtCore.Qt.AlignRight)
 
 
         self.body_widget = QWidget()  # 创建窗口主部件
@@ -71,7 +69,7 @@ class Ui_MainWindow(QWidget):
         self.body_layout.addWidget(self.body_widget)
 
         self.main_layout.addLayout(self.top_layout, stretch=1)
-        self.main_layout.addLayout(self.body_layout, stretch=7)
+        self.main_layout.addLayout(self.body_layout, stretch=10)
         self.setCentralWidget(self.main_widget)  # 设置窗口主部件
 
         self.left_widget = QWidget()  # 创建左侧部件
@@ -94,11 +92,17 @@ class Ui_MainWindow(QWidget):
         self.comment_label = QLabel("评论内容：")
         self.comment_text = QTextEdit()  # 创建文本框用于显示
         self.comment_text.setReadOnly(True)
+        font.setPointSize(12)
+        self.content_text.setFont(font)
+        self.comment_text.setFont(font)
+
         self.left_layout.addWidget(self.content_label, stretch=1)
         self.left_layout.addWidget(self.content_text, stretch=10)
         self.left_layout.addWidget(self.comment_label, stretch=1)
         self.left_layout.addWidget(self.comment_text, stretch=5)
 
+        font.setBold(True)
+        font.setPointSize(12)
         self.label1 = QLabel("反讽：")
         self.label2 = QLabel("比喻：")
         self.label3 = QLabel("夸张：")
@@ -107,7 +111,6 @@ class Ui_MainWindow(QWidget):
         self.label6 = QLabel("情感：")  # 用下拉列表
         self.label7 = QLabel("态度：")
         self.label8 = QLabel("其余潜台词：")
-        font.setPointSize(10)
         self.label1.setFont(font)
         self.label2.setFont(font)
         self.label3.setFont(font)
@@ -120,7 +123,7 @@ class Ui_MainWindow(QWidget):
         self.radio11 = QRadioButton("有")
         self.radio12 = QRadioButton("没有")
         self.radio13 = QRadioButton("不确定")
-        self.radio11.setChecked(True)
+        # self.radio11.setChecked(True)
         self.bg1 = QButtonGroup(self)
         self.bg1.addButton(self.radio11, 0)
         self.bg1.addButton(self.radio12, 1)
@@ -139,7 +142,7 @@ class Ui_MainWindow(QWidget):
         self.radio21 = QRadioButton("有")
         self.radio22 = QRadioButton("没有")
         self.radio23 = QRadioButton("不确定")
-        self.radio21.setChecked(True)
+        # self.radio21.setChecked(True)
         self.bg2 = QButtonGroup(self)
         self.bg2.addButton(self.radio21, 0)
         self.bg2.addButton(self.radio22, 1)
@@ -161,7 +164,7 @@ class Ui_MainWindow(QWidget):
         self.radio31 = QRadioButton("有")
         self.radio32 = QRadioButton("没有")
         self.radio33 = QRadioButton("不确定")
-        self.radio31.setChecked(True)
+        # self.radio31.setChecked(True)
         self.bg3 = QButtonGroup(self)
         self.bg3.addButton(self.radio31, 0)
         self.bg3.addButton(self.radio32, 1)
@@ -179,7 +182,7 @@ class Ui_MainWindow(QWidget):
         self.radio41 = QRadioButton("有")
         self.radio42 = QRadioButton("没有")
         self.radio43 = QRadioButton("不确定")
-        self.radio41.setChecked(True)
+        # self.radio41.setChecked(True)
         self.bg4 = QButtonGroup(self)
         self.bg4.addButton(self.radio41, 0)
         self.bg4.addButton(self.radio42, 1)
@@ -200,7 +203,7 @@ class Ui_MainWindow(QWidget):
         self.radio51 = QRadioButton("有")
         self.radio52 = QRadioButton("没有")
         self.radio53 = QRadioButton("不确定")
-        self.radio51.setChecked(True)
+        # self.radio51.setChecked(True)
         self.bg5 = QButtonGroup(self)
         self.bg5.addButton(self.radio51, 0)
         self.bg5.addButton(self.radio52, 1)
@@ -227,7 +230,7 @@ class Ui_MainWindow(QWidget):
         self.radio71 = QRadioButton("积极")
         self.radio72 = QRadioButton("消极")
         self.radio73 = QRadioButton("不确定")
-        self.radio71.setChecked(True)
+        # self.radio71.setChecked(True)
         self.bg7 = QButtonGroup(self)
         self.bg7.addButton(self.radio71, 0)
         self.bg7.addButton(self.radio72, 1)
@@ -242,11 +245,16 @@ class Ui_MainWindow(QWidget):
 
         self.input_8 = QLineEdit()
         self.input_8.setPlaceholderText("其他潜台词信息")
-        self.layout8 = QVBoxLayout()
+        self.layout8 = QHBoxLayout()
+        font.setPointSize(14)
+        font.setBold(False)
         self.save_btn = QPushButton("保存")
+        self.next_btn = QPushButton("下一条")
         self.save_btn.setFont(font)
-        self.layout8.addWidget(self.input_8, stretch=1)
+        self.next_btn.setFont(font)
         self.layout8.addWidget(self.save_btn, stretch=1)
+        self.layout8.addWidget(self.next_btn, stretch=1)
+
 
         self.right_layout.addLayout(self.layout11)
         self.right_layout.addLayout(self.layout1)
@@ -263,6 +271,7 @@ class Ui_MainWindow(QWidget):
         self.right_layout.addWidget(self.label7)
         self.right_layout.addLayout(self.layout7)
         self.right_layout.addWidget(self.label8)
+        self.right_layout.addWidget(self.input_8)
         self.right_layout.addLayout(self.layout8)
 
     def retranslateUi(self, MainWindow):
@@ -272,7 +281,6 @@ class Ui_MainWindow(QWidget):
         self.actionfileopen.setText(_translate("MainWindow", "打开文件..."))
 
     def _cleanText(self):
-
         self.inputtext_1.setText("")
         self.inputtext_21.setText("")
         self.inputtext_22.setText("")
@@ -283,10 +291,10 @@ class Ui_MainWindow(QWidget):
         self.inputtext_52.setText("")
         self.input_8.setText("")
         self.cb_6.setCurrentIndex(0)
-        self.radio11.setChecked(True)
-        self.radio21.setChecked(True)
-        self.radio31.setChecked(True)
-        self.radio41.setChecked(True)
-        self.radio51.setChecked(True)
-        self.radio71.setChecked(True)
+        # self.radio11.setChecked(True)
+        # self.radio21.setChecked(True)
+        # self.radio31.setChecked(True)
+        # self.radio41.setChecked(True)
+        # self.radio51.setChecked(True)
+        # self.radio71.setChecked(True)
 
