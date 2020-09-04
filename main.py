@@ -75,10 +75,13 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.emotion_value = i
 
     def _loadFile(self, file_path):
-        self.data = pd.read_csv(file_path, encoding='utf-8')
+        try:
+            self.data = pd.read_csv(file_path, encoding='utf-8')
+        except Exception as e:
+            self.data = pd.read_csv(file_path, encoding='gbk')
         self.data_index = self.data.index
-        print(len(self.data_index))
-        print(self.data.shape)
+        print("loading data", len(self.data_index))
+        print("loading data", self.data.shape)
 
 
     def _showData(self):
@@ -86,6 +89,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         is_operate = False
         for i in range(self.totalindex, nums):
             df = self.data.iloc[i]
+            print(df)
             f1, f2, f3, f4, f5, f6, f7, f8 = df['sarcasm'], df['metaphor'], df['exaggeration'], df['homophonic'], df['symbolism'], df['emotion'], df['sentiment'], df['other_subtext']
             if pd.isnull(f1) or pd.isnull(f2) or pd.isnull(f3) or pd.isnull(f4) or pd.isnull(f5) or pd.isnull(f7) or pd.isnull(f8):
                 if 'question' not in self.data.columns:
@@ -190,13 +194,17 @@ class MainForm(QMainWindow, Ui_MainWindow):
             return False, None
         if flag == 2:
             sents = "-" if label == "-1" or label == '0' else sents
+            sents = "-" if label == "1" and sents == "" else sents
             return True, "{};{}".format(label, sents)
         elif flag == 3:
             sents = "-" if label == "-1" or label == '0' else sents
             sents2 = "-" if label == "-1" or label == '0' else sents2
+            sents = "-" if label == "1" and sents == "" else sents
+            sents2 = "-" if label == "1" or sents2 == "" else sents2
+
             return True, "{};{};{}".format(label, sents, sents2)
         else:
-            return True, "{}".format(label)
+            return True, str(label)+" "
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, '信息', '确认退出吗？',

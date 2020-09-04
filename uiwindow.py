@@ -291,10 +291,26 @@ class Ui_MainWindow(QWidget):
         self.inputtext_52.setText("")
         self.input_8.setText("")
         self.cb_6.setCurrentIndex(0)
-        # self.radio11.setChecked(True)
-        # self.radio21.setChecked(True)
-        # self.radio31.setChecked(True)
-        # self.radio41.setChecked(True)
-        # self.radio51.setChecked(True)
-        # self.radio71.setChecked(True)
+        self._setDefaultRadio(self.bg1)
+        self._setDefaultRadio(self.bg2)
+        self._setDefaultRadio(self.bg3)
+        self._setDefaultRadio(self.bg4)
+        self._setDefaultRadio(self.bg5)
+        self._setDefaultRadio(self.bg7)
+
+    def _setDefaultRadio(self, bg):
+        checkedId = bg.checkedButton()
+        if checkedId is not None:
+            bg.setExclusive(False)
+            checkedId.setChecked(False)
+            bg.setExclusive(True)
+
+        # self.radio11.setChecked(False)
+        # self.bg1.setId(None, None)
+        # self.radio21.setChecked(False)
+        # self.radio31.setChecked(False)
+        # self.radio41.setChecked(False)
+        # self.radio51.setChecked(False)
+        # self.radio71.setChecked(False)
+
 
