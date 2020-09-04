@@ -5,13 +5,16 @@
 @Date     : 2020/8/29
 @Desc     :
 '''
+import PyQt5
 from PyQt5.QtWidgets import *
-from PyQt5 import QtWidgets
+import pygame
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtGui import QIcon
 from uiwindow import Ui_MainWindow
 import sys
 import os
 import pandas as pd
+from uiwindow import MessageWindow
 
 class MainForm(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -31,6 +34,8 @@ class MainForm(QMainWindow, Ui_MainWindow):
         self.symbolism = None
         self.sentiment = None
         self.save_curr_flag = False
+        self.current_qian = 0
+        self.nums = 0
         # add action
         self.actionfileopen.triggered.connect(self._openFile)
         self.cb_6.currentIndexChanged[str].connect(self._selectEmotion)
@@ -47,6 +52,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         file_name, file_type = QtWidgets.QFileDialog.getOpenFileName(self, "选择文件", os.getcwd(),
                                                                    "All Files(*);;Text Files(*.csv)")
         self._reset()
+        self.caifu.setText("财富：{} 毛".format(self.current_qian))
         self.file_path.setText(file_name)
         self.file_name = file_name
         self._loadFile(file_name)
@@ -83,13 +89,17 @@ class MainForm(QMainWindow, Ui_MainWindow):
         print("loading data", len(self.data_index))
         print("loading data", self.data.shape)
 
+    def _tricks(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("./music/123.wav")
+        pygame.mixer.music.set_volume(1)
+        pygame.mixer.music.play()
 
     def _showData(self):
         nums = self.data.shape[0]
         is_operate = False
         for i in range(self.totalindex, nums):
             df = self.data.iloc[i]
-            print(df)
             f1, f2, f3, f4, f5, f6, f7, f8 = df['sarcasm'], df['metaphor'], df['exaggeration'], df['homophonic'], df['symbolism'], df['emotion'], df['sentiment'], df['other_subtext']
             if pd.isnull(f1) or pd.isnull(f2) or pd.isnull(f3) or pd.isnull(f4) or pd.isnull(f5) or pd.isnull(f7) or pd.isnull(f8):
                 if 'question' not in self.data.columns:
@@ -117,12 +127,19 @@ class MainForm(QMainWindow, Ui_MainWindow):
             self.content_text.setText("{}\n{}".format(df['question'], df['content']))
         self._setLabel()
 
+    def suanqian(self):
+        self.nums += 1
+        self.current_qian = self.nums * 5
+        self.caifu.setText("财富：{} 毛".format(self.current_qian))
+
     def _clickNext(self):
         flag = self._saveData()
         if flag == True:
             if self.totalindex + 1 >= self.data.shape[0]:
                 self._showMessage(message="文件已经标注完")
                 return
+            self._tricks()
+            self.suanqian()
             self.totalindex += 1
             self._showData()
             self._resetSelection()

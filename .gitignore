@@ -99,5 +99,6 @@ ENV/
 
 build/
 dist/
+data/
 *.csv
 *.rar
