@@ -20,7 +20,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         super(MainForm, self).__init__()
         self.setupUi(self)
         self.setWindowIcon(QIcon('./icon/icon.ico'))
-        self.setWindowTitle("标注小民工")
+        self.setWindowTitle("标注小民工[可跳转版]")
         self.data = None
         self.data_index = None
         self.totalindex = 0
@@ -134,7 +134,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
                     'symbolism'], df['emotion'], df['sentiment'], df['other_subtext']
                 if pd.isnull(f1) or pd.isnull(f2) or pd.isnull(f3) or pd.isnull(f4) or pd.isnull(f5) or pd.isnull(
                         f7) or pd.isnull(f8):
-                    pass
+                    self._resetSelection()
                 else:
                     self.sarcasm = self._splitAndFillTxt(f1, [[self.radio11, self.radio12, self.radio13], self.inputtext_1])
                     self.metaphor = self._splitAndFillTxt(f2, [[self.radio21, self.radio22, self.radio23], self.inputtext_21, self.inputtext_22])
@@ -194,13 +194,12 @@ class MainForm(QMainWindow, Ui_MainWindow):
             self.totalindex += 1
             # self._showData()
             self._loadData()
-            # self._resetSelection()
             self.save_curr_flag = False
             if (self.totalindex+1) % 10 == 0:
                 self._saveToFile()
 
     def _clickJump(self):
-        flag = self._saveDataJust()
+        flag = self._saveDataJust(nextOrNot=False)
         index = self.index.text()
         if index.isdigit():
             index = int(index)
@@ -225,7 +224,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
     def _setLabel(self):
         self.curr_label.setText("当前条:{}".format(self.totalindex))
 
-    def _saveDataJust(self):
+    def _saveDataJust(self, nextOrNot=True):
         if self.data is None:
             self._showMessage(message="请选择并打开文件")
             return False
@@ -255,6 +254,8 @@ class MainForm(QMainWindow, Ui_MainWindow):
             self.data.loc[self.data_index[self.totalindex], 'sentiment'] = data7
             self.data.loc[self.data_index[self.totalindex], 'other_subtext'] = data8
             self.save_curr_flag = True
+            return True
+        if nextOrNot is False:
             return True
         self._showMessage(message="输入不符合格式")
         return False
