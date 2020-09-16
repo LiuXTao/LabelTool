@@ -144,8 +144,9 @@ class MainForm(QMainWindow, Ui_MainWindow):
                     [self.radio71, self.radio72, self.radio73][self._helper(f7)].setChecked(True)
                     self.sentiment = str(int(f7))
                     self.input_8.setText(f8 if f8 !='-' else '')
-                    self.emotion_value = self.emotion_dict[f6]
-                    self.cb_6.setCurrentIndex(self.emotion_value)
+                    cb_index = self.emotion_dict[f6]
+                    self.cb_6.setCurrentIndex(cb_index)
+                    self.emotion_value = f6
                 if 'question' not in self.data.columns:
                     self.comment_text.setText(str(df['comment']))
                     self.content_text.setText("{}".format(df['content']))
