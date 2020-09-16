@@ -15,6 +15,7 @@ class Ui_MainWindow(QWidget):
         super(Ui_MainWindow, self).__init__(parent)
         self.setWindowTitle('QLineEdit例子')
         self.emotion_list = ['气愤', '担心', '厌恶', '相信', '开心', '惊喜', '期待', '伤心', '无']
+        self.emotion_dict = {"气愤":0, '担心':1, '厌恶':2, '相信':3, '开心':4, '惊喜':5, '期待':6, '伤心':7, '无':8}
         self.radio_list = ["1", "-1", "0"]
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("标注工具")
@@ -64,11 +65,18 @@ class Ui_MainWindow(QWidget):
         self.caifu = QLabel("")
         self.caifu.setFont(fonts)
         self.caifu.setStyleSheet("color:red")
+        self.tiaozhuan = QHBoxLayout()
+        self.index = QLineEdit()
+        self.tiao_btn = QPushButton("跳转")
+        self.tiaozhuan.addWidget(self.index)
+        self.tiaozhuan.addWidget(self.tiao_btn)
+        self.index.setFixedSize(40, 30)
+        self.index.setVisible(False)
+        self.tiao_btn.setVisible(False)
         self.top_layout.addWidget(self.curr_label, 1, QtCore.Qt.AlignLeft)
         self.top_layout.addWidget(self.file_path, 4, QtCore.Qt.AlignCenter)
-        self.top_layout.addWidget(self.caifu, 1, QtCore.Qt.AlignRight)
+        self.top_layout.addLayout(self.tiaozhuan)
         # self.top_layout.addWidget(self.next_btn, 1, QtCore.Qt.AlignRight)
-
 
         self.body_widget = QWidget()  # 创建窗口主部件
         self.body_layout = QHBoxLayout()  # 创建主部件的布局
@@ -241,9 +249,8 @@ class Ui_MainWindow(QWidget):
         self.bg7.addButton(self.radio71, 0)
         self.bg7.addButton(self.radio72, 1)
         self.bg7.addButton(self.radio73, 2)
-        self.input_7 = QLineEdit()
-        self.input_7.setPlaceholderText("态度信息")
-
+        # self.input_7 = QLineEdit()
+        # self.input_7.setPlaceholderText("态度信息")
         self.layout7 = QHBoxLayout()
         self.layout7.addWidget(self.radio71)
         self.layout7.addWidget(self.radio72)
@@ -260,8 +267,6 @@ class Ui_MainWindow(QWidget):
         self.next_btn.setFont(font)
         self.layout8.addWidget(self.save_btn, stretch=1)
         self.layout8.addWidget(self.next_btn, stretch=1)
-
-
         self.right_layout.addLayout(self.layout11)
         self.right_layout.addLayout(self.layout1)
         self.right_layout.addLayout(self.layout21)
@@ -310,7 +315,6 @@ class Ui_MainWindow(QWidget):
             bg.setExclusive(False)
             checkedId.setChecked(False)
             bg.setExclusive(True)
-
         # self.radio11.setChecked(False)
         # self.bg1.setId(None, None)
         # self.radio21.setChecked(False)
@@ -319,58 +323,3 @@ class Ui_MainWindow(QWidget):
         # self.radio51.setChecked(False)
         # self.radio71.setChecked(False)
 
-
-# 定义一个可移动无边框3s提示消息界面
-class MessageWindow(Qt.QMainWindow):
-    def __init__(self, parent=None):
-        Qt.QWidget.__init__(self, parent)
-        self.ui = Ui_Message()
-        self.ui.setupUi(self)
-        self.setWindowFlags(Qt.Qt.FramelessWindowHint)
-        QtCore.QTimer().singleShot(3000, self.close)
-        self.show()
-
-    def mousePressEvent(self, event):
-        # 定义鼠标点击事件
-        if event.button() == QtCore.Qt.LeftButton:
-            self.dragPosition = event.globalPos() - self.frameGeometry().topLeft()
-            event.accept()
-
-    def mouseMoveEvent(self, event):
-        # 定义鼠标移动事件
-        if event.buttons() == QtCore.Qt.LeftButton:
-            self.move(event.globalPos() - self.dragPosition)
-            event.accept()
-
-    def setMessage(self, message):
-        self.ui.label.setText(message)
-
-class Ui_Message(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(538, 91)
-        self.frame = QtWidgets.QFrame(Form)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 541, 111))
-        # self.frame.setStyleSheet("background-image: url(:/img/messageback.png);")
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(0, 0, 531, 91))
-        font = QtGui.QFont()
-        font.setPointSize(31)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label.setFont(font)
-        self.label.setStyleSheet("background-color: transparent;\n"
-                                 "fontsize: 30px;")
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("label")
-
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-    def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "显示信息"))
