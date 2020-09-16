@@ -152,7 +152,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
                 else:
                     self.comment_text.setText(str(df['comment']))
                     self.content_text.setText("{}\n{}".format(df['question'], df['content']))
-                print(self.inputtext_1.text())
+                # print(self.inputtext_1.text())
                 is_operate = True
                 self._setLabel()
             if is_operate == False:
@@ -244,7 +244,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         data6 = self.emotion_value
         f7, data7 = self._constructor(self.sentiment, flag=1)
         data8 = self.input_8.text() if self.input_8.text() != "" else "-"
-        print(data1, data2, data3, data4, data5, data6, data7, data8)
+        # print(data1, data2, data3, data4, data5, data6, data7, data8)
         if f1 and f2 and f3 and f4 and f5 and f7:
             self.data.loc[self.data_index[self.totalindex], 'sarcasm'] = data1
             self.data.loc[self.data_index[self.totalindex], 'metaphor'] = data2
@@ -278,7 +278,7 @@ class MainForm(QMainWindow, Ui_MainWindow):
         data6 = self.emotion_value
         f7, data7 = self._constructor(self.sentiment, flag=1)
         data8 = self.input_8.text() if self.input_8.text() != "" else "-"
-        print(data1, data2, data3, data4, data5, data6, data7, data8)
+        # print(data1, data2, data3, data4, data5, data6, data7, data8)
         if f1 and f2 and f3 and f4 and f5 and f7:
             self.data.loc[self.data_index[self.totalindex],'sarcasm'] = data1
             self.data.loc[self.data_index[self.totalindex],'metaphor'] = data2
