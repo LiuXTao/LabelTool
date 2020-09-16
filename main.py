@@ -349,3 +349,6 @@ if __name__ == "__main__":
     win = MainForm()
     win.show()
     sys.exit(app.exec_())
+
+    # import sys
+    # sys.setrecursionlimit(10000)
